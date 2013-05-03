@@ -4,25 +4,27 @@
 function handleFileSelect(evt) {
   var files = evt.target.files; // FileList object
 
-  // files is a FileList of File objects. List some properties.
+  // files is a FileList of File objects.
   var output = [];
   for (var i = 0, f; f = files[i]; i++) {
-    output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
-        f.size, ' bytes, last modified: ',
-        f.lastModifiedDate.toLocaleDateString(), '</li>');
+    output.push('File name: ' + escape(f.name));
+    output.push('File type: ' + (f.type || 'N/A'));
+    output.push('File size: ' + f.size + ' bytes,');
+    output.push('last modified: ' + f.lastModifiedDate.toLocaleDateString());
+    fileReader(f);
   }
-  document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+  document.getElementById('list').innerHTML = '<ul><li>' + output.join('</li><li>') + '</li></ul>';
 }
 
 document.getElementById('files').addEventListener('change', handleFileSelect, false);
 
 
-
-
-
-
-// 幅（ Width ）と高さ（ height ）
-var w = 500;
-var h = 100;
-var barPadding = 1;
+var fileReader = function(file, parentTag) {
+  var reader = new FileReader();
+   reader.onload = function (evt) {
+     var pre = document.getElementById('fileText');
+     pre.innerHTML = reader.result;
+   };
+   reader.readAsText(file, 'shift-jis');
+}
 
