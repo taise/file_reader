@@ -15,10 +15,7 @@ $(function(){
     $('#list').html('<ul>' + output.join('</ul><ul>') + '</ul>');
   };
 
-  $('#files').change(function(evt){
-   fileSelect(evt);
-   extractData(evt);
- });
+  $('#files').change(function(evt){ fileSelect(evt); });
 
   var fileInfo = function(file){
     var infos = [];
@@ -34,15 +31,8 @@ $(function(){
   var fileReader = function(file, parentTag) {
     var reader = new FileReader();
     reader.onload = function (evt) {
-      $('#csvData').append("<pre>" + reader.result + "</pre>");
+      $('#fileText').append("<pre>" + reader.result + "</pre>");
     };
     reader.readAsText(file, 'shift-jis');
   };
-
-  // data extraction
-  var extractData = function(evt){
-    var csv = $('#csvData');
-    console.log(csv);
-  };
-
 });
