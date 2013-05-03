@@ -41,7 +41,7 @@ $(function(){
 
   // data extraction
   var extractData = function(evt){
-    var csv = evt.target;
+    var csv = $('#csvData');
     console.log(csv);
   };
 
